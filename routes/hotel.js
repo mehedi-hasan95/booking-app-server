@@ -33,7 +33,7 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/find/:id", async (req, res) => {
     try {
         const getHotel = await hotel.findById(req.params.id);
         res.status(200).json(getHotel);
@@ -46,6 +46,20 @@ router.get("/", async (req, res) => {
     try {
         const getAllHotel = await hotel.find(req.params.id);
         res.status(200).json(getAllHotel);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+router.get("/cityHotel", async (req, res) => {
+    const cities = req.query.cities.split(",");
+    try {
+        const cityList = await Promise.all(
+            cities.map((city) => {
+                return hotel.countDocuments({ city: city });
+            })
+        );
+        res.status(200).json(cityList);
     } catch (error) {
         res.status(500).json(error);
     }
