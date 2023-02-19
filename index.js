@@ -8,6 +8,7 @@ const port = process.env.PORT || 5000;
 // Require from Routes
 const hotelRoute = require("./routes/hotel");
 const userRoute = require("./routes/users");
+const roomRoute = require("./routes/room");
 
 mongoose.set("strictQuery", false);
 
@@ -18,6 +19,7 @@ app.use(express.json());
 // Custom Midleware
 app.use("/api/hotel", hotelRoute);
 app.use("/api/users", userRoute);
+app.use("/api/room", roomRoute);
 
 const connect = async () => {
     try {
