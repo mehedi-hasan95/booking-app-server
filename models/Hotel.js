@@ -1,6 +1,6 @@
 const { mongoose } = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+const HotelSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -50,4 +50,4 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Hotel", UserSchema);
+module.exports = mongoose.model("Hotel", HotelSchema);
