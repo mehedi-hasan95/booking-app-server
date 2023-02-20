@@ -65,4 +65,24 @@ router.get("/cityHotel", async (req, res) => {
     }
 });
 
+router.get("/hotelType", async (req, res) => {
+    try {
+        const hotelCount = await hotel.countDocuments({ type: "hotel" });
+        const motelCount = await hotel.countDocuments({ type: "motel" });
+        const resortCount = await hotel.countDocuments({ type: "resort" });
+        const apartmentCount = await hotel.countDocuments({
+            type: "apartment",
+        });
+
+        res.status(200).json([
+            { type: "hotel", count: hotelCount },
+            { type: "motel", count: motelCount },
+            { type: "resort", count: resortCount },
+            { type: "apartment", count: apartmentCount },
+        ]);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
 module.exports = router;
