@@ -43,8 +43,12 @@ router.get("/find/:id", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+    const { min, max, ...others } = req.query;
     try {
-        const getAllHotel = await hotel.find(req.params.id);
+        const getAllHotel = await hotel.find({
+            ...others,
+            cheapestPrice: { $gt: min | 1, $lt: max || 9999 },
+        });
         res.status(200).json(getAllHotel);
     } catch (error) {
         res.status(500).json(error);
