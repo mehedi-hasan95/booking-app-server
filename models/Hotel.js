@@ -22,6 +22,7 @@ const HotelSchema = new mongoose.Schema({
     city: {
         type: String,
         required: true,
+        lowercase: true,
     },
     country: {
         type: String,
@@ -44,7 +45,7 @@ const HotelSchema = new mongoose.Schema({
         min: 0,
         max: 5,
     },
-    cheapestPrice: {
+    price: {
         type: Number,
         required: true,
     },
